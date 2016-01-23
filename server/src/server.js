@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 var server = express();
 
 module.exports = function(logger, port, router) {
@@ -9,6 +10,7 @@ module.exports = function(logger, port, router) {
   server.set('view engine', 'ejs');
   server.set('x-powered-by', false);
   
+  server.use(compression());
   server.use(express.static('client/bundle'));
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
