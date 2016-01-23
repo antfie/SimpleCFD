@@ -1,6 +1,6 @@
 {
   "name": "simple-cfd",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple CFD",
   "main": "server/src/app.js",
   "scripts": {
@@ -29,5 +29,9 @@
     "mocha": "^2.3.4",
     "moment": "^2.11.1",
     "mongodb": "^2.1.4"
+  },
+  "engines": {
+    "node": "4.2.2",
+    "npm": "2.14.7"
   }
 }
