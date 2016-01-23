@@ -281,7 +281,6 @@
     data.data.sort(_sortData);
     
     _save();
-    
     _populateAddForm();
     _populateTableData();
   };
