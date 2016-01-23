@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple CFD</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      var data = <%- JSON.stringify(data)  %>;
+    </script>
+    <script src="/app.js"></script>
+  </head>
+  <body>
+    
+    <div class="container-fluid">
+      
+      <div class="alert alert-success saved-alert notification-alert invisible" role="alert">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        <span>&nbsp;Saved</span>
+      </div>
+      <div class="alert alert-danger failed-to-save-alert notification-alert invisible" role="alert">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <span>&nbsp;Error saving.</span>
+      </div>
+      
+      <div class="row header-row">
+        <div class="col-sm-10">
+          <h1>
+            <span class="glyphicon glyphicon-signal"></span>
+            <span>Simple <abbrev>CFD</abbrev></span>
+          </h1>
+        </div>
+        
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#graph-tab" aria-controls="graph" role="tab" data-toggle="tab">Graph</a></li>
+            <li role="presentation"><a href="#data-tab" aria-controls="data" role="tab" data-toggle="tab">Data</a></li>
+            <li role="presentation"><a href="#events-tab" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+            <!-- <li role="presentation"><a href="#settings-tab" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
+          </ul>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="graph-tab">
+              <div class="row">
+                <div class="col-xs-12">
+                  <select id="timeSelector" class="pull-right">
+                    <option value='7'>Last week</option>
+                    <option value='14'>Last 2 weeks</option>
+                    <option value='30'>Last 30 days</option>
+                    <option value='60'>Last 60 days</option>
+                    <option value='90' selected='selected'>Last 90 days</option>
+                    <option value=''>All data</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-xs-12">
+                  <div id="graph"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div role="tabpanel" class="tab-pane no-padding-top" id="data-tab">
+              <div class="row">
+                
+                <div class="col-sm-3 margin-top">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Record a new entry</div>
+                    <div class="panel-body">
+                      <form id="add-form">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-sm-9 margin-top">
+                  <div class="panel panel-default ">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr id="table-columns">
+                          </tr>
+                        </thead>
+                        <tbody id="table-data">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+              
+            <div role="tabpanel" class="tab-pane" id="events-tab">
+              
+              <div class="row">
+                
+                <div class="col-sm-3 margin-top">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Record a new event</div>
+                    <div class="panel-body">
+                      <form id="add-event-form">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-sm-9 margin-top">
+                  <div class="panel panel-default ">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Event</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="event-table-data">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              
+              
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="settings-tab">
+              
+              
+              
+              
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Column</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody data-bind="foreach: columns">
+                  <tr>
+                    <td><input data-bind="value: name" /></td>
+                    <td>
+                      <button class="btn btn-danger">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                        <span>Delete</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <a class="btn btn-default" href="#" role="button">Download Data</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <footer>
+            <span>Simple CFD was made with</span>
+            <span class="glyphicon glyphicon-heart pink" aria-hidden="true"></span>
+            <span>by <a href="http://antfie.com/">Anthony Fielding</a>.</span>
+            <span>Feedback &amp; suggestions: <a href="https://trello.com/b/zdIRX1yU">https://trello.com/b/zdIRX1yU</a></span>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
