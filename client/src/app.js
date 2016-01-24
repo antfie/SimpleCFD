@@ -143,6 +143,9 @@
   };
   
   var _populateTableData = function() {
+    var daysAdded = [];
+    var duplicateDays = [];
+    
     var columnsElement = jquery('#table-data');
     columnsElement.empty();
     
@@ -156,6 +159,14 @@
         
         if (c === 0) {
           dx = moment(dx).format('DD/MM/YYYY');
+          
+          if (daysAdded.indexOf(dx) !== -1) {
+            if (duplicateDays.indexOf(dx) === -1) {
+              duplicateDays.push(dx);
+            }
+          } else {
+            daysAdded.push(dx);
+          }
         }
         
         last.append('<td>' + dx + '</td>');
@@ -164,7 +175,25 @@
       last.append('<td><button class="btn btn-danger pull-right" data-delete-index="' + index + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span>&nbsp;Delete</span></button></td>');
     }
     
+    _showHideDuplicates(duplicateDays);
+    
     jquery('[data-delete-index]').click(_deleteRow);
+  };
+  
+  var _showHideDuplicates = function(duplicates) {
+    if (duplicates.length < 1) {
+      jquery('.duplicate-data-alert').hide();
+      return;
+    }
+    
+    jquery('.duplicate-data-alert').show();
+    
+    var duplicateDaysHolder = jquery('#duplicate-data-list');
+    duplicateDaysHolder.empty();
+    
+    for (var index = 0; index < duplicates.length; index++) {
+      duplicateDaysHolder.append('<li>' + duplicates[index] + '</li>');
+    }
   };
   
   var _deleteRow = function(e) {
