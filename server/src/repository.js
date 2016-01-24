@@ -3,6 +3,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var Collection = mongodb.Collection;
 var ObjectId = mongodb.ObjectId;
+var crypto = require('crypto');
 
 BluebirdPromise.promisifyAll(Collection.prototype);
 BluebirdPromise.promisifyAll(MongoClient);
@@ -37,7 +38,13 @@ module.exports = function(logger, connectionString) {
   
   let getNewLink = function() {
     return new BluebirdPromise(function(resolve, reject) {
-      return resolve(new ObjectId());
+      crypto.randomBytes(12, function (err, buf) {
+        if (err) {
+          return reject(err);
+        }
+        
+        return resolve(ObjectId.createFromHexString(buf.toString('hex')));
+      });
     });
   };
   

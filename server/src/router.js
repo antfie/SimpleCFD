@@ -14,7 +14,7 @@ module.exports = function(controller) {
   router.get('/:link/', function(req, res) {
     console.log('Request:', req.params.link);
     return controller.getData(req.params.link).then(function(data) {
-      if (data && data.newLink) {
+      if (data.newLink) {
         return res.redirect('/' + data.newLink + '/');
       }
       

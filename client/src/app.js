@@ -277,8 +277,13 @@
       d.push(v);
     }
     
-    data.data.push(d);
-    data.data.sort(_sortData);
+    if (data.isNew) {
+      data.data = [d];
+      delete data.isNew;
+    } else {
+      data.data.push(d);
+      data.data.sort(_sortData);
+    }
     
     _save();
     _populateAddForm();
